@@ -75,7 +75,8 @@ target_include_directories (${TARGET_NAME} PRIVATE
 
 # Need for using the project by add_subdirectory
 target_include_directories (${TARGET_NAME} INTERFACE
-  ${CMAKE_CURRENT_LIST_DIR}/../include
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/../include>
+  $<INSTALL_INTERFACE:include>
   )
 
 if (UNIX)
@@ -106,6 +107,7 @@ target_link_libraries (${TARGET_NAME}
 	)
 
 install (TARGETS ${TARGET_NAME}
+	EXPORT ${TARGET_NAME}
 	RUNTIME DESTINATION bin
 	LIBRARY DESTINATION lib
 	ARCHIVE DESTINATION lib
